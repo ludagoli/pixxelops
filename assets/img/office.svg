@@ -1,55 +1,165 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240">
-  <!-- Diseño de oficina pixelart (320x240 pixeles = 10x8 celdas de 32px) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Diseño de oficina pixelart mejorado (800x600 pixeles) -->
   
   <!-- Fondo/Suelo -->
-  <rect width="320" height="240" fill="#1a1a2e" />
-  <rect y="48" width="320" height="192" fill="#2a2a4a" />
+  <rect width="800" height="600" fill="#1a1a2e" />
+  <rect y="120" width="800" height="480" fill="#2a2a4a" />
+  
+  <!-- Cuadrícula del suelo -->
+  <g opacity="0.2">
+    <path d="M0,160 h800 M0,200 h800 M0,240 h800 M0,280 h800 M0,320 h800 M0,360 h800 M0,400 h800 M0,440 h800 M0,480 h800 M0,520 h800 M0,560 h800" stroke="#8080a0" stroke-width="1" />
+    <path d="M40,120 v480 M80,120 v480 M120,120 v480 M160,120 v480 M200,120 v480 M240,120 v480 M280,120 v480 M320,120 v480 M360,120 v480 M400,120 v480 M440,120 v480 M480,120 v480 M520,120 v480 M560,120 v480 M600,120 v480 M640,120 v480 M680,120 v480 M720,120 v480 M760,120 v480" stroke="#8080a0" stroke-width="1" />
+  </g>
   
   <!-- Paredes -->
-  <rect width="320" height="48" fill="#3a3a5a" />
-  <rect width="32" height="240" fill="#3a3a5a" />
-  <rect x="288" width="32" height="240" fill="#3a3a5a" />
+  <rect width="800" height="120" fill="#3a3a5a" />
+  <rect width="40" height="600" fill="#3a3a5a" />
+  <rect x="760" width="40" height="600" fill="#3a3a5a" />
   
-  <!-- Escritorios -->
-  <!-- Escritorio 1 -->
-  <rect x="64" y="80" width="64" height="16" fill="#5a3a2a" />
-  <rect x="64" y="96" width="16" height="16" fill="#5a3a2a" />
-  <rect x="112" y="96" width="16" height="16" fill="#5a3a2a" />
+  <!-- Decoración de paredes -->
+  <rect x="100" y="30" width="120" height="60" fill="#444" stroke="#666" stroke-width="4" /> <!-- Cuadro decorativo -->
+  <rect x="580" y="30" width="120" height="60" fill="#444" stroke="#666" stroke-width="4" /> <!-- Cuadro decorativo -->
   
-  <!-- Escritorio 2 -->
-  <rect x="192" y="80" width="64" height="16" fill="#5a3a2a" />
-  <rect x="192" y="96" width="16" height="16" fill="#5a3a2a" />
-  <rect x="240" y="96" width="16" height="16" fill="#5a3a2a" />
+  <!-- Ventanas -->
+  <rect x="300" y="20" width="200" height="80" fill="#66CCFF" />
+  <rect x="300" y="20" width="200" height="10" fill="#777777" />
+  <rect x="300" y="20" width="10" height="80" fill="#777777" />
+  <rect x="490" y="20" width="10" height="80" fill="#777777" />
+  <rect x="300" y="90" width="200" height="10" fill="#777777" />
+  <rect x="400" y="20" width="10" height="80" fill="#777777" />
   
-  <!-- Computadoras -->
-  <!-- Monitor 1 -->
-  <rect x="80" y="64" width="32" height="16" fill="#333333" />
-  <rect x="84" y="68" width="24" height="8" fill="#3366FF" />
-  <!-- Teclado 1 -->
-  <rect x="80" y="80" width="32" height="4" fill="#666666" />
+  <!-- Área de escritorios centrales -->
+  <!-- Escritorio grande central (sala de reuniones) -->
+  <rect x="320" y="280" width="160" height="80" fill="#5a3a2a" />
+  <rect x="320" y="360" width="20" height="20" fill="#5a3a2a" />
+  <rect x="460" y="360" width="20" height="20" fill="#5a3a2a" />
+  <rect x="380" y="360" width="40" height="20" fill="#5a3a2a" />
   
-  <!-- Monitor 2 -->
-  <rect x="208" y="64" width="32" height="16" fill="#333333" />
-  <rect x="212" y="68" width="24" height="8" fill="#3366FF" />
-  <!-- Teclado 2 -->
-  <rect x="208" y="80" width="32" height="4" fill="#666666" />
+  <!-- Sillas alrededor de la mesa -->
+  <rect x="340" y="240" width="30" height="30" fill="#555" rx="5" ry="5" />
+  <rect x="430" y="240" width="30" height="30" fill="#555" rx="5" ry="5" />
+  <rect x="280" y="300" width="30" height="30" fill="#555" rx="5" ry="5" />
+  <rect x="490" y="300" width="30" height="30" fill="#555" rx="5" ry="5" />
+  <rect x="340" y="370" width="30" height="30" fill="#555" rx="5" ry="5" />
+  <rect x="430" y="370" width="30" height="30" fill="#555" rx="5" ry="5" />
+  
+  <!-- Objetos sobre la mesa -->
+  <rect x="370" y="300" width="60" height="30" fill="#ddd" /> <!-- Laptop o papel -->
+  <circle cx="400" cy="320" r="10" fill="#ff9933" /> <!-- Objeto decorativo -->
+  
+  <!-- Área de estaciones de trabajo -->
+  <!-- Escritorio izquierdo 1 -->
+  <rect x="80" y="160" width="120" height="40" fill="#5a3a2a" />
+  <rect x="80" y="200" width="20" height="20" fill="#5a3a2a" />
+  <rect x="180" y="200" width="20" height="20" fill="#5a3a2a" />
+  
+  <!-- Computadora izquierda 1 -->
+  <rect x="110" y="130" width="60" height="30" fill="#333333" />
+  <rect x="120" y="140" width="40" height="15" fill="#3366FF" />
+  <rect x="130" y="155" width="20" height="5" fill="#333333" />
+  <rect x="110" y="160" width="60" height="5" fill="#666666" />
+  
+  <!-- Escritorio izquierdo 2 -->
+  <rect x="80" y="260" width="120" height="40" fill="#5a3a2a" />
+  <rect x="80" y="300" width="20" height="20" fill="#5a3a2a" />
+  <rect x="180" y="300" width="20" height="20" fill="#5a3a2a" />
+  
+  <!-- Computadora izquierda 2 -->
+  <rect x="110" y="230" width="60" height="30" fill="#333333" />
+  <rect x="120" y="240" width="40" height="15" fill="#3366FF" />
+  <rect x="130" y="255" width="20" height="5" fill="#333333" />
+  <rect x="110" y="260" width="60" height="5" fill="#666666" />
+  
+  <!-- Escritorio derecho 1 -->
+  <rect x="600" y="160" width="120" height="40" fill="#5a3a2a" />
+  <rect x="600" y="200" width="20" height="20" fill="#5a3a2a" />
+  <rect x="700" y="200" width="20" height="20" fill="#5a3a2a" />
+  
+  <!-- Computadora derecha 1 -->
+  <rect x="630" y="130" width="60" height="30" fill="#333333" />
+  <rect x="640" y="140" width="40" height="15" fill="#3366FF" />
+  <rect x="650" y="155" width="20" height="5" fill="#333333" />
+  <rect x="630" y="160" width="60" height="5" fill="#666666" />
+  
+  <!-- Escritorio derecho 2 (Estación principal con computadora grande) -->
+  <rect x="600" y="260" width="120" height="40" fill="#5a3a2a" />
+  <rect x="600" y="300" width="20" height="20" fill="#5a3a2a" />
+  <rect x="700" y="300" width="20" height="20" fill="#5a3a2a" />
+  
+  <!-- Computadora derecha 2 (terminal principal)-->
+  <rect x="630" y="230" width="60" height="30" fill="#333333" />
+  <rect x="640" y="240" width="40" height="15" fill="#33de5e" /> <!-- Terminal verde -->
+  <rect x="650" y="255" width="20" height="5" fill="#333333" />
+  <rect x="630" y="260" width="60" height="5" fill="#666666" />
   
   <!-- Elementos decorativos -->
-  <!-- Planta -->
-  <rect x="32" y="176" width="16" height="16" fill="#225500" />
-  <rect x="36" y="160" width="8" height="16" fill="#338800" />
+  <!-- Plantas -->
+  <rect x="60" y="440" width="40" height="40" fill="#225500" />
+  <rect x="70" y="400" width="20" height="40" fill="#338800" />
+  
+  <rect x="700" y="440" width="40" height="40" fill="#225500" />
+  <rect x="710" y="400" width="20" height="40" fill="#338800" />
   
   <!-- Servidor en la pared -->
-  <rect x="256" y="144" width="16" height="32" fill="#444444" />
-  <rect x="258" y="148" width="2" height="2" fill="#33FF33" />
-  <rect x="258" y="154" width="2" height="2" fill="#FF3333" />
-  <rect x="258" y="160" width="2" height="2" fill="#3366FF" />
+  <rect x="680" y="500" width="40" height="80" fill="#444444" />
+  <rect x="685" y="510" width="5" height="5" fill="#33FF33" />
+  <rect x="685" y="520" width="5" height="5" fill="#FF3333" />
+  <rect x="685" y="530" width="5" height="5" fill="#3366FF" />
+  <rect x="685" y="540" width="30" height="2" fill="#666" />
+  <rect x="685" y="550" width="30" height="2" fill="#666" />
+  <rect x="685" y="560" width="30" height="2" fill="#666" />
   
-  <!-- Ventana -->
-  <rect x="128" y="16" width="64" height="32" fill="#66CCFF" />
-  <rect x="128" y="16" width="64" height="4" fill="#777777" />
-  <rect x="128" y="16" width="4" height="32" fill="#777777" />
-  <rect x="188" y="16" width="4" height="32" fill="#777777" />
-  <rect x="128" y="44" width="64" height="4" fill="#777777" />
-  <rect x="160" y="16" width="4" height="32" fill="#777777" />
+  <!-- Máquina de café -->
+  <rect x="60" y="520" width="40" height="60" fill="#333" />
+  <rect x="70" y="530" width="20" height="30" fill="#222" />
+  <rect x="75" y="560" width="10" height="5" fill="#33de5e" /> <!-- Luz verde -->
+  <rect x="65" y="540" width="5" height="5" fill="#ff9933" /> <!-- Botón -->
+  <rect x="90" y="540" width="5" height="5" fill="#ff9933" /> <!-- Botón -->
+  
+  <!-- Impresora -->
+  <rect x="160" y="520" width="60" height="30" fill="#444" />
+  <rect x="170" y="510" width="40" height="10" fill="#333" />
+  <rect x="180" y="525" width="20" height="10" fill="#222" />
+  <rect x="175" y="527" width="5" height="5" fill="#33de5e" /> <!-- Luz verde -->
+  
+  <!-- Nevera pequeña -->
+  <rect x="240" y="520" width="40" height="60" fill="#ddd" />
+  <rect x="240" y="550" width="40" height="2" fill="#888" />
+  <rect x="270" y="530" width="5" height="10" fill="#888" /> <!-- Manija -->
+  
+  <!-- Panel de control en la pared -->
+  <rect x="500" y="500" width="80" height="40" fill="#333" />
+  <rect x="510" y="510" width="60" height="20" fill="#111" />
+  <rect x="520" y="515" width="5" height="5" fill="#33de5e" /> <!-- Luz -->
+  <rect x="530" y="515" width="5" height="5" fill="#ff9933" /> <!-- Luz -->
+  <rect x="540" y="515" width="5" height="5" fill="#ff3333" /> <!-- Luz -->
+  <rect x="550" y="515" width="5" height="5" fill="#3366ff" /> <!-- Luz -->
+  
+  <!-- Mesas auxiliares -->
+  <rect x="350" y="500" width="100" height="30" fill="#5a3a2a" />
+  <rect x="360" y="530" width="10" height="20" fill="#5a3a2a" />
+  <rect x="430" y="530" width="10" height="20" fill="#5a3a2a" />
+  
+  <!-- Objetos en mesa auxiliar -->
+  <rect x="370" y="490" width="20" height="10" fill="#ddd" /> <!-- Papel -->
+  <rect x="400" y="490" width="10" height="10" fill="#33de5e" /> <!-- Objeto -->
+  <rect x="420" y="490" width="15" height="10" fill="#ff9933" /> <!-- Objeto -->
+  
+  <!-- Alfombra central -->
+  <rect x="300" y="400" width="200" height="120" fill="#353553" rx="10" ry="10" />
+  
+  <!-- Detalles alfombra -->
+  <rect x="320" y="420" width="160" height="80" fill="#2a2a4a" stroke="#353553" stroke-width="2" rx="5" ry="5" />
+  
+  <!-- Logo en la pared (PixxelOps) -->
+  <rect x="280" y="40" width="15" height="5" fill="#33de5e" />
+  <rect x="280" y="45" width="5" height="15" fill="#33de5e" />
+  <rect x="280" y="60" width="15" height="5" fill="#33de5e" />
+  <rect x="290" y="45" width="5" height="15" fill="#33de5e" />
+  
+  <!-- Luces en el techo -->
+  <rect x="120" y="50" width="40" height="10" fill="#ffff99" opacity="0.7" />
+  <rect x="320" y="50" width="40" height="10" fill="#ffff99" opacity="0.7" />
+  <rect x="520" y="50" width="40" height="10" fill="#ffff99" opacity="0.7" />
+  <rect x="720" y="50" width="40" height="10" fill="#ffff99" opacity="0.7" />
 </svg>

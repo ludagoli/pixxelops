@@ -1,36 +1,66 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Cuerpo del personaje (32x32 pixeles) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Cuerpo del personaje mejorado (64x64 pixeles) -->
   
-  <!-- Cabeza -->
-  <rect x="10" y="4" width="12" height="12" fill="#FFB266" />
-  
-  <!-- Cabello -->
-  <rect x="10" y="4" width="12" height="3" fill="#663300" />
-  <rect x="10" y="4" width="2" height="8" fill="#663300" />
-  
-  <!-- Ojos -->
-  <rect x="13" y="8" width="2" height="2" fill="#000000" />
-  <rect x="17" y="8" width="2" height="2" fill="#000000" />
-  
-  <!-- Boca -->
-  <rect x="14" y="12" width="4" height="1" fill="#CC3333" />
-  
-  <!-- Cuerpo -->
-  <rect x="12" y="16" width="8" height="10" fill="#3366CC" />
-  
-  <!-- Brazos -->
-  <rect x="8" y="16" width="4" height="2" fill="#3366CC" />
-  <rect x="20" y="16" width="4" height="2" fill="#3366CC" />
-  <rect x="8" y="18" width="2" height="4" fill="#FFB266" />
-  <rect x="22" y="18" width="2" height="4" fill="#FFB266" />
+  <!-- Sombra del personaje -->
+  <ellipse cx="32" cy="60" rx="16" ry="4" fill="#000000" opacity="0.2" />
   
   <!-- Piernas -->
-  <rect x="12" y="26" width="3" height="6" fill="#333333" />
-  <rect x="17" y="26" width="3" height="6" fill="#333333" />
+  <rect x="24" y="44" width="6" height="14" fill="#333333" rx="2" ry="2" />
+  <rect x="34" y="44" width="6" height="14" fill="#333333" rx="2" ry="2" />
+  
+  <!-- Zapatos -->
+  <rect x="23" y="56" width="8" height="4" fill="#222222" rx="2" ry="2" />
+  <rect x="33" y="56" width="8" height="4" fill="#222222" rx="2" ry="2" />
+  
+  <!-- Cuerpo -->
+  <rect x="24" y="28" width="16" height="18" fill="#3366CC" rx="6" ry="6" />
+  
+  <!-- Brazos -->
+  <rect x="16" y="28" width="8" height="4" fill="#3366CC" rx="2" ry="2" />
+  <rect x="40" y="28" width="8" height="4" fill="#3366CC" rx="2" ry="2" />
+  
+  <!-- Manos -->
+  <rect x="14" y="32" width="5" height="10" fill="#FFB266" rx="2.5" ry="2.5" />
+  <rect x="45" y="32" width="5" height="10" fill="#FFB266" rx="2.5" ry="2.5" />
+  
+  <!-- Líneas decorativas en el traje -->
+  <rect x="24" y="32" width="16" height="2" fill="#264d99" />
+  <rect x="24" y="38" width="16" height="2" fill="#264d99" />
+  
+  <!-- Cabeza -->
+  <rect x="22" y="10" width="20" height="20" fill="#FFB266" rx="10" ry="10" />
+  
+  <!-- Cuello -->
+  <rect x="28" y="26" width="8" height="4" fill="#FFB266" />
+  
+  <!-- Cabello -->
+  <path d="M22,20 C22,14 24,10 32,10 C40,10 42,14 42,18 C42,14 40,12 32,12 C24,12 22,14 22,20" fill="#663300" />
+  <rect x="22" y="10" width="20" height="6" fill="#663300" rx="5" ry="5" />
+  <rect x="22" y="10" width="4" height="14" fill="#663300" />
+  
+  <!-- Ojos -->
+  <circle cx="27" cy="20" r="2.5" fill="#ffffff" />
+  <circle cx="37" cy="20" r="2.5" fill="#ffffff" />
+  <circle cx="27" cy="20" r="1.5" fill="#000000" />
+  <circle cx="37" cy="20" r="1.5" fill="#000000" />
+  <circle cx="27.5" cy="19.5" r="0.5" fill="#ffffff" />
+  <circle cx="37.5" cy="19.5" r="0.5" fill="#ffffff" />
+  
+  <!-- Cejas -->
+  <path d="M25,17 C26,16 28,16 29,17" stroke="#663300" stroke-width="1" fill="none" />
+  <path d="M35,17 C36,16 38,16 39,17" stroke="#663300" stroke-width="1" fill="none" />
+  
+  <!-- Boca -->
+  <path d="M29,24 C31,26 33,26 35,24" stroke="#CC3333" stroke-width="1.5" fill="none" />
+  
+  <!-- Gafas -->
+  <rect x="24" y="18" width="6" height="4" fill="none" stroke="#555555" stroke-width="1" rx="2" ry="2" />
+  <rect x="34" y="18" width="6" height="4" fill="none" stroke="#555555" stroke-width="1" rx="2" ry="2" />
+  <path d="M30,20 L34,20" stroke="#555555" stroke-width="1" />
+  <path d="M24,20 L22,18" stroke="#555555" stroke-width="1" />
+  <path d="M40,20 L42,18" stroke="#555555" stroke-width="1" />
   
   <!-- Detalles: Insignia DevOps -->
-  <rect x="14" y="18" width="4" height="2" fill="#FF6633" />
-  
-  <!-- Gafas (opcional) -->
-  <rect x="12" y="8" width="8" height="1" fill="#555555" />
+  <rect x="28" y="32" width="8" height="4" fill="#FF6633" rx="1" ry="1" />
+  <text x="29" y="35.5" font-family="Arial" font-size="3" fill="#ffffff" font-weight="bold">DEVOPS</text>
 </svg>
