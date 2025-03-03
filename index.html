@@ -32,6 +32,21 @@
             left: 0;
         }
         
+        /* Aviso de compatibilidad con PC */
+        .pc-compatibility-notice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 153, 51, 0.9);
+            color: #0a0a12;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            z-index: 2000;
+            display: none;
+        }
+        
         /* Media queries para ajustar tamaños en diferentes dispositivos */
         @media (max-width: 768px) {
             body {
@@ -48,6 +63,10 @@
             
             .challenges-grid {
                 gap: 1rem;
+            }
+            
+            .pc-compatibility-notice {
+                display: block;
             }
         }
         
@@ -501,6 +520,11 @@
     </style>
 </head>
 <body>
+    <!-- Aviso de compatibilidad con PC -->
+    <div class="pc-compatibility-notice">
+        ⚠️ Esta experiencia es mejor en un ordenador de escritorio. Algunos elementos pueden no funcionar correctamente en dispositivos móviles.
+    </div>
+
     <div class="container">
         <!-- Escena de introducción -->
         <div id="intro-scene">
