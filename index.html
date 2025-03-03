@@ -2,7 +2,9 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <title>PixxelOps: SysAdmin Quest</title>
     <style>
         /* Estilos generales */
@@ -35,11 +37,72 @@
             body {
                 font-size: 16px;
             }
+            
+            #intro-scene h1 {
+                font-size: 2.5rem;
+            }
+            
+            .challenge-card {
+                height: 250px;
+            }
+            
+            .challenges-grid {
+                gap: 1rem;
+            }
         }
         
         @media (max-width: 480px) {
             body {
                 font-size: 14px;
+            }
+            
+            #intro-scene h1 {
+                font-size: 2rem;
+            }
+            
+            .pixel-button {
+                width: 80%;
+                max-width: 250px;
+            }
+            
+            #intro-scene {
+                width: 95%;
+                padding: 1rem;
+            }
+            
+            .challenge-card {
+                height: 220px;
+                padding: 1rem;
+            }
+            
+            .challenge-card h3 {
+                font-size: 1.2rem;
+            }
+            
+            .challenges-grid {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+            
+            #terminal-scene {
+                padding: 0.5rem;
+            }
+            
+            #terminal-output {
+                font-size: 0.9rem;
+            }
+            
+            .command-prompt {
+                margin-top: 5px;
+            }
+            
+            #command-input {
+                font-size: 0.9rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+                width: 95%;
             }
         }
         
@@ -863,8 +926,19 @@ abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minute
             const officeWidth = officeScene.clientWidth;
             const officeHeight = officeScene.clientHeight;
             
-            cellWidth = officeWidth / gridWidth;
-            cellHeight = officeHeight / gridHeight;
+            // Asegurarse de que el grid mantenga una relación de aspecto razonable
+            const aspectRatio = officeWidth / officeHeight;
+            const gridAspectRatio = gridWidth / gridHeight;
+            
+            if (aspectRatio > gridAspectRatio) {
+                // La pantalla es más ancha de lo necesario
+                cellHeight = officeHeight / gridHeight;
+                cellWidth = cellHeight;
+            } else {
+                // La pantalla es más alta de lo necesario
+                cellWidth = officeWidth / gridWidth;
+                cellHeight = cellWidth;
+            }
             
             console.log("Tamaño de celda:", cellWidth, cellHeight);
         }
@@ -883,8 +957,15 @@ abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minute
             player.style.height = cellHeight + 'px';
         }
         
+        // Detección de dispositivo móvil
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
         // Función para mover al jugador a una nueva posición
         function movePlayer(x, y) {
+            // Limitar las coordenadas al área válida del grid
+            x = Math.max(2, Math.min(x, gridWidth - 3));
+            y = Math.max(3, Math.min(y, gridHeight - 1));
+            
             // Verificar si la posición es válida (solo suelo)
             const targetCell = document.querySelector(`.office-background > div[data-x="${x}"][data-y="${y}"]`);
             
@@ -903,7 +984,11 @@ abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minute
             console.log("Distancia a computadora:", distX, distY);
             
             if (distX <= 2 && distY <= 2) {
-                showNotification('Presiona E o haz clic en la computadora para acceder al menú de retos');
+                if (isMobile) {
+                    showNotification('Toca la computadora para acceder al menú de retos');
+                } else {
+                    showNotification('Presiona E o haz clic en la computadora para acceder al menú de retos');
+                }
             }
         }
         
@@ -912,9 +997,12 @@ abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minute
             notification.textContent = message;
             notification.style.display = 'block';
             
+            // En móviles, mostramos las notificaciones por más tiempo
+            const displayTime = isMobile ? 5000 : 3000;
+            
             setTimeout(() => {
                 notification.style.display = 'none';
-            }, 3000);
+            }, displayTime);
         }
         
         // Función para cambiar al menú de retos
@@ -1044,7 +1132,105 @@ abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minute
             }
         });
         
-        // Control del personaje con teclado
+        // Agregar controles táctiles para móviles
+        if (isMobile) {
+            // Agregar botones de dirección
+            const createTouchControls = () => {
+                const controlsContainer = document.createElement('div');
+                controlsContainer.className = 'touch-controls';
+                controlsContainer.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    display: grid;
+                    grid-template-columns: repeat(3, 60px);
+                    grid-template-rows: repeat(3, 60px);
+                    gap: 5px;
+                    z-index: 1000;
+                `;
+                
+                // Posiciones: [0,0], [0,1], [0,2], [1,0], [1,1], [1,2], [2,0], [2,1], [2,2]
+                const buttonPositions = [
+                    null, 
+                    { text: '↑', action: () => movePlayer(playerX, playerY - 1) },
+                    null,
+                    { text: '←', action: () => movePlayer(playerX - 1, playerY) },
+                    null,
+                    { text: '→', action: () => movePlayer(playerX + 1, playerY) },
+                    null,
+                    { text: '↓', action: () => movePlayer(playerX, playerY + 1) },
+                    null
+                ];
+                
+                buttonPositions.forEach((buttonConfig, index) => {
+                    const cell = document.createElement('div');
+                    
+                    if (buttonConfig) {
+                        const button = document.createElement('button');
+                        button.textContent = buttonConfig.text;
+                        button.style.cssText = `
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(51, 222, 94, 0.6);
+                            border: 2px solid #33de5e;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: bold;
+                            border-radius: 50%;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            user-select: none;
+                            -webkit-tap-highlight-color: transparent;
+                        `;
+                        
+                        button.addEventListener('touchstart', (e) => {
+                            e.preventDefault();
+                            buttonConfig.action();
+                            button.style.backgroundColor = 'rgba(51, 222, 94, 0.9)';
+                        });
+                        
+                        button.addEventListener('touchend', (e) => {
+                            e.preventDefault();
+                            button.style.backgroundColor = 'rgba(51, 222, 94, 0.6)';
+                        });
+                        
+                        cell.appendChild(button);
+                    }
+                    
+                    controlsContainer.appendChild(cell);
+                });
+                
+                document.body.appendChild(controlsContainer);
+                
+                return controlsContainer;
+            };
+            
+            const touchControls = createTouchControls();
+            
+            // Mostrar/ocultar controles según la escena activa
+            const updateTouchControlsVisibility = () => {
+                if (officeScene.style.display === 'block') {
+                    touchControls.style.display = 'grid';
+                } else {
+                    touchControls.style.display = 'none';
+                }
+            };
+            
+            // Observar cambios en las escenas
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach(() => {
+                    updateTouchControlsVisibility();
+                });
+            });
+            
+            observer.observe(officeScene, { attributes: true, attributeFilter: ['style'] });
+            updateTouchControlsVisibility();
+        }
+        
+        // Control del personaje con teclado (para escritorio)
         document.addEventListener('keydown', (event) => {
             if (officeScene.style.display === 'block') {
                 switch(event.key) {
