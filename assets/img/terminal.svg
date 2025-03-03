@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240">
+  <!-- Terminal pantalla completa (320x240 pixeles) -->
+  
+  <!-- Fondo negro -->
+  <rect width="320" height="240" fill="#0a0a12" />
+  
+  <!-- Borde del terminal -->
+  <rect x="4" y="4" width="312" height="232" fill="none" stroke="#33de5e" stroke-width="2" />
+  
+  <!-- Barra de título -->
+  <rect x="4" y="4" width="312" height="16" fill="#33de5e" />
+  <text x="10" y="16" font-family="monospace" font-size="12" fill="#0a0a12">Terminal - PixxelOps v1.0.0</text>
+  
+  <!-- Contenido de terminal (ejemplo) -->
+  <text x="10" y="40" font-family="monospace" font-size="12" fill="#33de5e">$ ls</text>
+  <text x="10" y="60" font-family="monospace" font-size="12" fill="#33de5e">documentos/ proyectos/</text>
+  
+  <text x="10" y="80" font-family="monospace" font-size="12" fill="#33de5e">$ cd proyectos</text>
+  <text x="10" y="100" font-family="monospace" font-size="12" fill="#33de5e">$ ls</text>
+  <text x="10" y="120" font-family="monospace" font-size="12" fill="#33de5e">docker-challenge/</text>
+  
+  <text x="10" y="140" font-family="monospace" font-size="12" fill="#33de5e">$ cd docker-challenge</text>
+  <text x="10" y="160" font-family="monospace" font-size="12" fill="#33de5e">$ ls</text>
+  <text x="10" y="180" font-family="monospace" font-size="12" fill="#33de5e">instrucciones.md</text>
+  
+  <text x="10" y="200" font-family="monospace" font-size="12" fill="#33de5e">$ docker pull nginx</text>
+  <text x="10" y="220" font-family="monospace" font-size="12" fill="#33de5e">$ _</text>
+</svg>

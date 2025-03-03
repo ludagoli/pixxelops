@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixxelOps: SysAdmin Quest</title>
+    <style>
+        /* Estilos generales */
+        @font-face {
+            font-family: 'PixelFont';
+            src: url('https://cdnjs.cloudflare.com/ajax/libs/VT323/1.3.0/VT323-Regular.ttf') format('truetype');
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PixelFont', monospace;
+        }
+        
+        body {
+            background-color: #0a0a12;
+            color: #33de5e;
+            overflow: hidden;
+            font-size: 20px;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+        
+        /* Media queries para ajustar tamaños en diferentes dispositivos */
+        @media (max-width: 768px) {
+            body {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 14px;
+            }
+        }
+        
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Escena de introducción */
+        #intro-scene {
+            text-align: center;
+            width: 80%;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        #intro-scene h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #ff9933;
+            text-shadow: 4px 4px 0px #0a0a12;
+        }
+        
+        #intro-scene p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .pixel-button {
+            background-color: #33de5e;
+            color: #0a0a12;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            position: relative;
+            image-rendering: pixelated;
+        }
+        
+        .pixel-button:before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #33de5e, #ff9933);
+            z-index: -1;
+            image-rendering: pixelated;
+        }
+        
+        /* Escena de oficina */
+        #office-scene {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            max-height: 100vh;
+            background-color: #1a1a2e;
+            overflow: hidden;
+        }
+        
+        .office-background {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            grid-template-columns: repeat(25, minmax(32px, 1fr));
+            grid-template-rows: repeat(19, minmax(32px, 1fr));
+            background-image: url('assets/img/office.svg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+        }
+        
+        .office-background > div {
+            z-index: 10;
+            min-width: 32px;
+            min-height: 32px;
+        }
+        
+        .floor {
+            background-color: transparent;
+        }
+        
+        .wall {
+            background-color: transparent;
+        }
+        
+        .desk {
+            background-color: transparent;
+        }
+        
+        .computer {
+            background-color: #333333;
+            cursor: pointer;
+            position: relative;
+            z-index: 50;
+            border: 2px solid #555555;
+        }
+        
+        .computer:hover {
+            background-color: #555555;
+            border: 2px solid #777777;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .computer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('assets/img/terminal.svg');
+            background-size: 80%;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: 51;
+        }
+        
+        #player {
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            transition: left 0.2s, top 0.2s;
+            z-index: 100;
+            background-image: url('assets/img/player.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none; /* Para que no interfiera con los clicks */
+            transform-origin: center;
+            will-change: transform, left, top;
+        }
+        
+        /* Terminal */
+        #terminal-scene {
+            display: none;
+            width: 100%;
+            height: 100vh;
+            max-width: 100vw;
+            max-height: 100vh;
+            background-color: #0a0a12;
+            border: 4px solid #33de5e;
+            padding: 1rem;
+            overflow-y: auto;
+            position: relative;
+            box-sizing: border-box;
+        }
+        
+        #terminal-output {
+            width: 100%;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+            color: #33de5e;
+            font-size: 1.2rem;
+            white-space: pre-wrap;
+            line-height: 1.5;
+        }
+        
+        .command-prompt {
+            display: flex;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .prompt-symbol {
+            color: #ff9933;
+            margin-right: 10px;
+        }
+        
+        #command-input {
+            flex-grow: 1;
+            background-color: transparent;
+            border: none;
+            color: #33de5e;
+            font-size: 1.2rem;
+            outline: none;
+            caret-color: #33de5e;
+        }
+        
+        .back-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff9933;
+            color: #0a0a12;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        
+        /* Clases para mostrar mensajes de éxito o error */
+        .success-message {
+            color: #33de5e;
+            font-weight: bold;
+        }
+        
+        .error-message {
+            color: #ff5555;
+        }
+        
+        .notification {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #33de5e;
+            color: #0a0a12;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        
+        /* Modal de instrucciones para el desafío */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #1a1a2e;
+            border: 4px solid #33de5e;
+            width: 90%;
+            max-width: 800px;
+            padding: 2rem;
+            color: #33de5e;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        
+        .modal-content h2 {
+            color: #ff9933;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-content p {
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .modal-content ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .close-button {
+            background-color: #ff9933;
+            color: #0a0a12;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Escena de introducción -->
+        <div id="intro-scene">
+            <h1>PixxelOps: SysAdmin Quest</h1>
+            <p>Bienvenido a PixxelOps, donde tu misión es convertirte en el mejor administrador de sistemas del mundo digital.</p>
+            <p>Como un heroico SysAdmin, te enfrentarás a desafíos de DevOps usando la línea de comandos para resolver problemas técnicos y garantizar que todos los sistemas sigan funcionando sin problemas.</p>
+            <p>¿Estás listo para comenzar tu aventura?</p>
+            <button id="start-button" class="pixel-button">Comenzar Aventura</button>
+        </div>
+        
+        <!-- Escena de oficina -->
+        <div id="office-scene">
+            <div id="player"></div>
+            <div class="office-background" id="office-grid"></div>
+            <div class="notification" id="notification">Haz clic donde quieras ir</div>
+        </div>
+        
+        <!-- Escena de terminal -->
+        <div id="terminal-scene">
+            <div id="terminal-output"></div>
+            <div class="command-prompt">
+                <span class="prompt-symbol">$</span>
+                <input type="text" id="command-input" autocomplete="off" autofocus>
+            </div>
+            <button class="back-button" id="back-button">Salir</button>
+        </div>
+        
+        <!-- Modal de instrucciones para el desafío -->
+        <div class="modal" id="challenge-modal">
+            <div class="modal-content">
+                <h2>Desafío Nivel 1: Configuración de Docker</h2>
+                <p>¡Bienvenido a tu primer desafío! Como SysAdmin principiante, tu tarea es configurar un contenedor Docker básico para ejecutar un servidor web.</p>
+                <p><strong>Contexto:</strong> Tu equipo necesita implementar rápidamente un servidor web para mostrar la página de estado del sistema.</p>
+                <p><strong>Objetivo:</strong> Crear y ejecutar un contenedor Docker que utilice la imagen oficial de Nginx.</p>
+                <p><strong>Instrucciones:</strong></p>
+                <ul>
+                    <li>Usa el comando <code>docker pull</code> para obtener la imagen de Nginx</li>
+                    <li>Usa <code>docker run</code> para iniciar un contenedor que exponga el puerto 80</li>
+                    <li>Verifica que el contenedor esté funcionando con <code>docker ps</code></li>
+                </ul>
+                <p><strong>Pista:</strong> El comando completo debería incluir mapeo de puertos con la opción <code>-p</code>.</p>
+                <button class="close-button" id="close-modal">Entendido</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos DOM
+        const introScene = document.getElementById('intro-scene');
+        const officeScene = document.getElementById('office-scene');
+        const terminalScene = document.getElementById('terminal-scene');
+        const startButton = document.getElementById('start-button');
+        const backButton = document.getElementById('back-button');
+        const player = document.getElementById('player');
+        const officeGrid = document.getElementById('office-grid');
+        const terminalOutput = document.getElementById('terminal-output');
+        const commandInput = document.getElementById('command-input');
+        const notification = document.getElementById('notification');
+        const challengeModal = document.getElementById('challenge-modal');
+        const closeModalButton = document.getElementById('close-modal');
+        
+        // Variables del juego
+        const gridSize = 32; // Tamaño de cada celda en píxeles
+        const gridWidth = 25; // Número de celdas horizontales
+        const gridHeight = 19; // Número de celdas verticales
+        let playerX = 12;
+        let playerY = 14;
+        let challengeCompleted = false;
+        let currentDirectory = '/home/admin';
+        let computerPosition = { x: 18, y: 6 };
+        
+        // Estructura del sistema de archivos simulado
+        let fileSystem = {
+            '/': {
+                'home': {
+                    'admin': {
+                        'documentos': {
+                            'readme.txt': 'Bienvenido a PixxelOps! Este es tu espacio de trabajo.'
+                        },
+                        'proyectos': {
+                            'docker-challenge': {
+                                'instrucciones.md': 'Configura un contenedor Docker con Nginx.'
+                            }
+                        }
+                    }
+                },
+                'etc': {
+                    'config.conf': 'Configuración del sistema'
+                },
+                'var': {
+                    'log': {
+                        'syslog': 'Historial de eventos del sistema'
+                    }
+                }
+            }
+        };
+        
+        // Comandos de terminal disponibles
+        const commands = {
+            'help': () => {
+                return `Comandos disponibles:
+- help: Muestra esta ayuda
+- ls [directorio]: Lista archivos en el directorio actual o especificado
+- cd [directorio]: Cambia el directorio actual
+- pwd: Muestra la ruta del directorio actual
+- cat [archivo]: Muestra el contenido de un archivo
+- clear: Limpia la terminal
+- docker [comandos]: Gestiona contenedores Docker
+- challenge: Muestra las instrucciones del desafío actual`;
+            },
+            'ls': (args) => {
+                const path = args[0] || currentDirectory;
+                const items = getItemsInPath(path);
+                if (!items) return `ls: no se puede acceder a '${path}': No existe el fichero o el directorio`;
+                
+                let result = '';
+                // Mostrar directorios
+                Object.keys(items).forEach(name => {
+                    if (typeof items[name] === 'object') {
+                        result += `<span style="color: #33de5e;">${name}/</span>  `;
+                    }
+                });
+                
+                // Mostrar archivos
+                Object.keys(items).forEach(name => {
+                    if (typeof items[name] === 'string') {
+                        result += `<span style="color: #cccccc;">${name}</span>  `;
+                    }
+                });
+                
+                return result || 'No hay archivos en este directorio';
+            },
+            'cd': (args) => {
+                if (!args[0]) {
+                    currentDirectory = '/home/admin';
+                    return '';
+                }
+                
+                const newPath = resolvePath(args[0]);
+                const items = getItemsInPath(newPath);
+                
+                if (!items) {
+                    return `cd: ${args[0]}: No existe el fichero o el directorio`;
+                }
+                
+                if (typeof items !== 'object') {
+                    return `cd: ${args[0]}: No es un directorio`;
+                }
+                
+                currentDirectory = newPath;
+                return '';
+            },
+            'pwd': () => {
+                return currentDirectory;
+            },
+            'cat': (args) => {
+                if (!args[0]) {
+                    return 'cat: falta el nombre del archivo';
+                }
+                
+                const path = resolvePath(args[0]);
+                const content = getFileContent(path);
+                
+                if (content === null) {
+                    return `cat: ${args[0]}: No existe el fichero o el directorio`;
+                }
+                
+                if (typeof content === 'object') {
+                    return `cat: ${args[0]}: Es un directorio`;
+                }
+                
+                return content;
+            },
+            'clear': () => {
+                terminalOutput.innerHTML = '';
+                return '';
+            },
+            'docker': (args) => {
+                if (!args[0]) {
+                    return `
+Usage:  docker [OPTIONS] COMMAND
+
+A self-sufficient runtime for containers
+
+Common Commands:
+  run         Create and run a new container from an image
+  exec        Execute a command in a running container
+  ps          List containers
+  build       Build an image from a Dockerfile
+  pull        Download an image from a registry
+  images      List images
+
+Run 'docker COMMAND --help' for more information on a command.
+                    `;
+                }
+                
+                switch(args[0]) {
+                    case 'pull':
+                        if (!args[1]) {
+                            return 'docker: "pull" requiere al menos 1 argumento.';
+                        }
+                        return `Descargando imagen '${args[1]}'...\nLa imagen ha sido descargada con éxito.`;
+                    
+                    case 'images':
+                        return `REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+nginx         latest    a6bd71f48f68   2 weeks ago    187MB
+ubuntu        latest    3b418d7b466a   4 weeks ago    77.8MB
+hello-world   latest    9c7a54a9a43c   5 months ago   13.3kB`;
+                    
+                    case 'run':
+                        if (args.includes('-p') && args.includes('80:80') && args.includes('nginx')) {
+                            setTimeout(() => {
+                                addToTerminal('<span class="success-message">¡Felicidades! Has completado el desafío de configuración de Docker correctamente.</span>');
+                                challengeCompleted = true;
+                            }, 1000);
+                            return `Creando contenedor a partir de la imagen 'nginx'...
+contenedor inicializado con ID abc123def456
+El servidor web Nginx está funcionando en http://localhost:80`;
+                        }
+                        
+                        if (args.includes('nginx')) {
+                            return `Creando contenedor a partir de la imagen 'nginx'...
+contenedor inicializado con ID xyz789
+NOTA: No has mapeado los puertos. El servidor web no será accesible desde el host.`;
+                        }
+                        
+                        return `docker: el comando "run" requiere al menos 1 argumento.
+Consulta 'docker run --help'.`;
+                    
+                    case 'ps':
+                        if (challengeCompleted) {
+                            return `CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                NAMES
+abc123def456   nginx     "/docker-entrypoint.…"   2 minutes ago    Up 2 minutes    0.0.0.0:80->80/tcp   eager_beaver`;
+                        }
+                        return 'CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES';
+                    
+                    default:
+                        return `docker: '${args[0]}' no es un comando docker.`;
+                }
+            },
+            'challenge': () => {
+                showChallengeModal();
+                return 'Mostrando instrucciones del desafío...';
+            }
+        };
+        
+        // Funciones de utilidad para la simulación del sistema de archivos
+        function getItemsInPath(path) {
+            const parts = path.split('/').filter(p => p !== '');
+            let current = fileSystem['/'];
+            
+            if (path === '/') return current;
+            
+            for (const part of parts) {
+                if (!current[part]) return null;
+                current = current[part];
+            }
+            
+            return current;
+        }
+        
+        function getFileContent(path) {
+            const parts = path.split('/').filter(p => p !== '');
+            let current = fileSystem['/'];
+            
+            if (parts.length === 0) return current;
+            
+            for (let i = 0; i < parts.length - 1; i++) {
+                if (!current[parts[i]]) return null;
+                current = current[parts[i]];
+            }
+            
+            const fileName = parts[parts.length - 1];
+            if (!current[fileName]) return null;
+            
+            return current[fileName];
+        }
+        
+        function resolvePath(path) {
+            if (path.startsWith('/')) {
+                return path;
+            }
+            
+            // Manejo de ..
+            const currentParts = currentDirectory.split('/').filter(p => p !== '');
+            const pathParts = path.split('/').filter(p => p !== '');
+            
+            for (const part of pathParts) {
+                if (part === '..') {
+                    if (currentParts.length > 0) {
+                        currentParts.pop();
+                    }
+                } else if (part !== '.') {
+                    currentParts.push(part);
+                }
+            }
+            
+            return '/' + currentParts.join('/');
+        }
+        
+        // Función para generar el grid de la oficina
+        function generateOfficeGrid() {
+            // Limpiar el grid
+            officeGrid.innerHTML = '';
+            
+            // Crear celdas del grid
+            for (let y = 0; y < gridHeight; y++) {
+                for (let x = 0; x < gridWidth; x++) {
+                    const cell = document.createElement('div');
+                    
+                    // Asignar clases según la posición
+                    if (y < 3) {
+                        cell.className = 'wall'; // Pared superior
+                    } else if (x < 2 || x >= gridWidth - 2) {
+                        cell.className = 'wall'; // Paredes laterales
+                    } else if (y >= 5 && y <= 7 && x >= 15 && x <= 20) {
+                        cell.className = 'desk'; // Escritorio
+                        
+                        // Colocar la computadora
+                        if (x === computerPosition.x && y === computerPosition.y) {
+                            cell.className = 'computer';
+                            cell.dataset.x = x;
+                            cell.dataset.y = y;
+                            cell.addEventListener('click', () => {
+                                // Verificar si el jugador está cerca de la computadora
+                                const distX = Math.abs(playerX - computerPosition.x);
+                                const distY = Math.abs(playerY - computerPosition.y);
+                                
+                                console.log("Click en computadora. Distancia:", distX, distY);
+                                
+                                // Hacemos más permisivo el rango de interacción
+                                if (distX <= 2 && distY <= 2) {
+                                    switchToTerminal();
+                                } else {
+                                    showNotification('Acércate a la computadora para usarla');
+                                }
+                            });
+                        }
+                    } else {
+                        cell.className = 'floor'; // Suelo
+                    }
+                    
+                    // Hacer que las celdas de suelo sean cliqueables para mover al jugador
+                    if (cell.className === 'floor') {
+                        cell.addEventListener('click', () => {
+                            movePlayer(x, y);
+                        });
+                        cell.dataset.x = x;
+                        cell.dataset.y = y;
+                    }
+                    
+                    officeGrid.appendChild(cell);
+                }
+            }
+            
+            // Posicionar al jugador inicialmente
+            updatePlayerPosition();
+        }
+        
+        /* Variables para el cálculo de posición responsiva */
+        let cellWidth, cellHeight;
+        
+        /* Función para calcular el tamaño de las celdas según el tamaño de la pantalla */
+        function calculateCellSize() {
+            const officeWidth = officeScene.clientWidth;
+            const officeHeight = officeScene.clientHeight;
+            
+            cellWidth = officeWidth / gridWidth;
+            cellHeight = officeHeight / gridHeight;
+            
+            console.log("Tamaño de celda:", cellWidth, cellHeight);
+        }
+        
+        // Función para actualizar la posición del jugador
+        function updatePlayerPosition() {
+            // Actualizar tamaño de celdas
+            calculateCellSize();
+            
+            // Aplicar la posición escalada
+            player.style.left = (playerX * cellWidth) + 'px';
+            player.style.top = (playerY * cellHeight) + 'px';
+            
+            // Ajustar el tamaño del jugador al tamaño de la celda
+            player.style.width = cellWidth + 'px';
+            player.style.height = cellHeight + 'px';
+        }
+        
+        // Función para mover al jugador a una nueva posición
+        function movePlayer(x, y) {
+            // Verificar si la posición es válida (solo suelo)
+            const targetCell = document.querySelector(`.office-background > div[data-x="${x}"][data-y="${y}"]`);
+            
+            // Debug - mostrar mensaje para ver qué está pasando
+            console.log("Mover a:", x, y, "Target:", targetCell);
+            
+            // Permitir movimiento incluso si no encuentra targetCell (problema con selectores)
+            playerX = x;
+            playerY = y;
+            updatePlayerPosition();
+            
+            // Verificar si el jugador está cerca de la computadora
+            const distX = Math.abs(playerX - computerPosition.x);
+            const distY = Math.abs(playerY - computerPosition.y);
+            
+            console.log("Distancia a computadora:", distX, distY);
+            
+            if (distX <= 2 && distY <= 2) {
+                showNotification('Presiona E o haz clic en la computadora para acceder al terminal');
+            }
+        }
+        
+        // Función para mostrar notificaciones
+        function showNotification(message) {
+            notification.textContent = message;
+            notification.style.display = 'block';
+            
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
+        
+        // Función para cambiar a la escena de terminal
+        function switchToTerminal() {
+            officeScene.style.display = 'none';
+            terminalScene.style.display = 'block';
+            
+            // Establecer un fondo estilizado para el terminal
+            terminalScene.style.backgroundImage = 'linear-gradient(rgba(10, 10, 18, 0.9), rgba(10, 10, 18, 0.95)), url("assets/img/terminal.svg")';
+            terminalScene.style.backgroundSize = 'cover';
+            terminalScene.style.backgroundPosition = 'center';
+            
+            commandInput.focus();
+            
+            // Si es la primera vez que accede al terminal, mostrar mensaje de bienvenida
+            if (terminalOutput.innerHTML === '') {
+                addToTerminal('<span style="color: #ff9933; font-size: 1.2em;">Terminal de PixxelOps v1.0.0</span>');
+                addToTerminal('==================================');
+                addToTerminal('Escribe <span style="color: #ff9933;">help</span> para ver los comandos disponibles');
+                addToTerminal('Escribe <span style="color: #ff9933;">challenge</span> para ver las instrucciones del desafío actual');
+                addToTerminal('<span style="color: #3366FF;">NOTA: Asegúrate de tener Docker instalado para completar los desafíos</span>');
+                addToTerminal('');
+                
+                // Mostrar automáticamente el desafío después de un breve retraso
+                setTimeout(showChallengeModal, 1000);
+            }
+        }
+        
+        // Función para volver a la escena de oficina
+        function switchToOffice() {
+            terminalScene.style.display = 'none';
+            officeScene.style.display = 'block';
+            
+            // Recalcular tamaños al volver a la oficina
+            setTimeout(() => {
+                calculateCellSize();
+                updatePlayerPosition();
+            }, 100);
+        }
+        
+        // Función para añadir texto a la salida del terminal
+        function addToTerminal(text) {
+            terminalOutput.innerHTML += text + '<br>';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+        
+        // Función para procesar los comandos del terminal
+        function processCommand(command) {
+            addToTerminal(`<span class="prompt-symbol">$</span> ${command}`);
+            
+            if (!command.trim()) {
+                addToTerminal('');
+                return;
+            }
+            
+            const parts = command.trim().split(' ');
+            const cmd = parts[0].toLowerCase();
+            const args = parts.slice(1);
+            
+            if (commands[cmd]) {
+                const output = commands[cmd](args);
+                if (output) {
+                    addToTerminal(output);
+                }
+            } else {
+                addToTerminal(`${cmd}: comando no encontrado`);
+            }
+            
+            addToTerminal('');
+        }
+        
+        // Función para mostrar el modal de desafío
+        function showChallengeModal() {
+            challengeModal.style.display = 'flex';
+        }
+        
+        // Función para manejar el redimensionamiento de la ventana
+        function handleResize() {
+            if (officeScene.style.display === 'block') {
+                calculateCellSize();
+                updatePlayerPosition();
+            }
+        }
+        
+        // Event Listeners
+        window.addEventListener('resize', handleResize);
+        
+        startButton.addEventListener('click', () => {
+            introScene.style.display = 'none';
+            officeScene.style.display = 'block';
+            generateOfficeGrid();
+            
+            // Actualizar tamaños después de mostrar
+            setTimeout(() => {
+                calculateCellSize();
+                updatePlayerPosition();
+            }, 100);
+            
+            // Mostrar notificación inicial
+            showNotification('Explora la oficina y encuentra tu computadora');
+        });
+        
+        backButton.addEventListener('click', switchToOffice);
+        
+        closeModalButton.addEventListener('click', () => {
+            challengeModal.style.display = 'none';
+        });
+        
+        commandInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const command = commandInput.value;
+                processCommand(command);
+                commandInput.value = '';
+            }
+        });
+        
+        // Control del personaje con teclado
+        document.addEventListener('keydown', (event) => {
+            if (officeScene.style.display === 'block') {
+                switch(event.key) {
+                    case 'ArrowUp':
+                    case 'w':
+                        movePlayer(playerX, playerY - 1);
+                        break;
+                    case 'ArrowDown':
+                    case 's':
+                        movePlayer(playerX, playerY + 1);
+                        break;
+                    case 'ArrowLeft':
+                    case 'a':
+                        movePlayer(playerX - 1, playerY);
+                        break;
+                    case 'ArrowRight':
+                    case 'd':
+                        movePlayer(playerX + 1, playerY);
+                        break;
+                    case 'e':
+                        // Verificar si el jugador está cerca de la computadora
+                        const distX = Math.abs(playerX - computerPosition.x);
+                        const distY = Math.abs(playerY - computerPosition.y);
+                        
+                        console.log("Tecla E presionada. Distancia a computadora:", distX, distY);
+                        
+                        // Hacemos más permisivo el rango de interacción
+                        if (distX <= 2 && distY <= 2) {
+                            switchToTerminal();
+                        } else {
+                            showNotification('Acércate más a la computadora');
+                        }
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

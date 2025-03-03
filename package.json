@@ -1,0 +1,22 @@
+{
+  "name": "pixxelops",
+  "version": "1.0.0",
+  "description": "Juego de simulación de sysadmin en estilo pixel art",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "dev": "serve ."
+  },
+  "keywords": [
+    "pixel-art",
+    "game",
+    "sysadmin",
+    "terminal",
+    "docker"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.1"
+  }
+}
