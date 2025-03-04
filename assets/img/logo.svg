@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200">
+  <!-- Fondo -->
+  <rect width="400" height="200" fill="#1A1B26" rx="10" ry="10"/>
+  
+  <!-- Texto principal -->
+  <g id="mainText">
+    <!-- P -->
+    <rect x="50" y="70" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="60" y="70" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="70" y="70" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="50" y="80" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="70" y="80" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="50" y="90" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="60" y="90" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="70" y="90" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="50" y="100" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="50" y="110" width="10" height="10" fill="#7AA2F7"/>
+    <rect x="50" y="120" width="10" height="10" fill="#7AA2F7"/>
+    
+    <!-- i -->
+    <rect x="90" y="70" width="10" height="10" fill="#BB9AF7"/>
+    <rect x="90" y="90" width="10" height="10" fill="#BB9AF7"/>
+    <rect x="90" y="100" width="10" height="10" fill="#BB9AF7"/>
+    <rect x="90" y="110" width="10" height="10" fill="#BB9AF7"/>
+    <rect x="90" y="120" width="10" height="10" fill="#BB9AF7"/>
+    
+    <!-- x cruzada especial 1 -->
+    <rect x="110" y="90" width="10" height="10" fill="#F7768E"/>
+    <rect x="130" y="90" width="10" height="10" fill="#F7768E"/>
+    <rect x="120" y="100" width="10" height="10" fill="#F7768E"/>
+    <rect x="110" y="110" width="10" height="10" fill="#F7768E"/>
+    <rect x="130" y="110" width="10" height="10" fill="#F7768E"/>
+    
+    <!-- x cruzada especial 2 (desplazada ligeramente) -->
+    <rect x="135" y="90" width="10" height="10" fill="#FF9E64"/>
+    <rect x="155" y="90" width="10" height="10" fill="#FF9E64"/>
+    <rect x="145" y="100" width="10" height="10" fill="#FF9E64"/>
+    <rect x="135" y="110" width="10" height="10" fill="#FF9E64"/>
+    <rect x="155" y="110" width="10" height="10" fill="#FF9E64"/>
+    
+    <!-- e -->
+    <rect x="175" y="90" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="185" y="90" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="195" y="90" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="175" y="100" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="175" y="110" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="185" y="110" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="195" y="110" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="175" y="120" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="185" y="120" width="10" height="10" fill="#9ECE6A"/>
+    <rect x="195" y="120" width="10" height="10" fill="#9ECE6A"/>
+    
+    <!-- l -->
+    <rect x="215" y="70" width="10" height="10" fill="#73DACA"/>
+    <rect x="215" y="80" width="10" height="10" fill="#73DACA"/>
+    <rect x="215" y="90" width="10" height="10" fill="#73DACA"/>
+    <rect x="215" y="100" width="10" height="10" fill="#73DACA"/>
+    <rect x="215" y="110" width="10" height="10" fill="#73DACA"/>
+    <rect x="215" y="120" width="10" height="10" fill="#73DACA"/>
+    <rect x="225" y="120" width="10" height="10" fill="#73DACA"/>
+    
+    <!-- O -->
+    <rect x="245" y="90" width="10" height="10" fill="#E0AF68"/>
+    <rect x="255" y="90" width="10" height="10" fill="#E0AF68"/>
+    <rect x="265" y="90" width="10" height="10" fill="#E0AF68"/>
+    <rect x="245" y="100" width="10" height="10" fill="#E0AF68"/>
+    <rect x="265" y="100" width="10" height="10" fill="#E0AF68"/>
+    <rect x="245" y="110" width="10" height="10" fill="#E0AF68"/>
+    <rect x="265" y="110" width="10" height="10" fill="#E0AF68"/>
+    <rect x="245" y="120" width="10" height="10" fill="#E0AF68"/>
+    <rect x="255" y="120" width="10" height="10" fill="#E0AF68"/>
+    <rect x="265" y="120" width="10" height="10" fill="#E0AF68"/>
+    
+    <!-- p -->
+    <rect x="285" y="90" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="295" y="90" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="305" y="90" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="285" y="100" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="305" y="100" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="285" y="110" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="295" y="110" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="305" y="110" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="285" y="120" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="285" y="130" width="10" height="10" fill="#7DCFFF"/>
+    <rect x="285" y="140" width="10" height="10" fill="#7DCFFF"/>
+    
+    <!-- s -->
+    <rect x="325" y="90" width="10" height="10" fill="#F7768E"/>
+    <rect x="335" y="90" width="10" height="10" fill="#F7768E"/>
+    <rect x="345" y="90" width="10" height="10" fill="#F7768E"/>
+    <rect x="325" y="100" width="10" height="10" fill="#F7768E"/>
+    <rect x="325" y="110" width="10" height="10" fill="#F7768E"/>
+    <rect x="335" y="110" width="10" height="10" fill="#F7768E"/>
+    <rect x="345" y="110" width="10" height="10" fill="#F7768E"/>
+    <rect x="345" y="120" width="10" height="10" fill="#F7768E"/>
+    <rect x="325" y="120" width="10" height="10" fill="#F7768E"/>
+    <rect x="335" y="120" width="10" height="10" fill="#F7768E"/>
+  </g>
+  
+  <!-- Elementos decorativos -->
+  <!-- Terminal -->
+  <rect x="100" y="140" width="120" height="50" fill="#24283B" rx="5" ry="5"/>
+  <rect x="105" y="145" width="110" height="40" fill="#1A1B26" rx="2" ry="2"/>
+  <text x="110" y="165" font-family="monospace" font-size="10" fill="#9ECE6A">$ docker ps</text>
+  <text x="110" y="178" font-family="monospace" font-size="10" fill="#7AA2F7">$ kubectl get pods</text>
+  
+  <!-- Elementos docker/kubernetes -->
+  <rect x="230" y="140" width="60" height="50" fill="#24283B" rx="5" ry="5"/>
+  <rect x="240" y="150" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="250" y="150" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="260" y="150" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="240" y="160" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="260" y="160" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="240" y="170" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="250" y="170" width="10" height="10" fill="#7AA2F7"/>
+  <rect x="260" y="170" width="10" height="10" fill="#7AA2F7"/>
+  
+  <!-- Dominio .com -->
+</svg>
