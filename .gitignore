@@ -2,9 +2,16 @@
 .vercel
 
 # Node
-node_modules
+node_modules/
 package-lock.json
 npm-debug.log
+yarn.lock
+yarn-error.log
+
+# Build directory
+/dist
+/dist-ssr
+/.cache
 
 # OS
 .DS_Store
@@ -15,3 +22,9 @@ Thumbs.db
 .vscode
 *.swp
 *.swo
+
+# Env files
+.env
+.env.local
+.env.development
+.env.production
